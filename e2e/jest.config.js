@@ -1,6 +1,6 @@
 const execSync = require("child_process").execSync;
 
-const IOS = process.env.IOS || "14.3";
+const IOS = process.env.IOS || "14.2";
 const REPORT_DIR = process.env.REPORT_DIR || `./report/${IOS}`;
 const CURR_BRANCH_TESTER = execSync("echo $(git rev-parse --abbrev-ref HEAD)", {
   encoding: "utf8",
@@ -26,7 +26,7 @@ module.exports = {
   runner: "groups",
   setupFilesAfterEnv: ["../src/init.ts"],
   testEnvironment: "../src/environment",
-  testTimeout: 30000,
+  testTimeout: 180000,
   injectGlobals: true,
   preset: "ts-jest",
   verbose: true,

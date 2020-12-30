@@ -8,14 +8,14 @@ lerna-debug.log*
 dist/
 artifacts/
 # sut*
+# xcuserdata
 sut/Index
 sut/ModuleCache.noindex/
 sut/SourcePackages/
-sut/Wikipedia.xcworkspace/
 sut-o
-report/
-reports/
 report*
+sut/info.plist
+sut/Wikipedia.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 *.lock
 Pods/

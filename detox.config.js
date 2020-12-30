@@ -1,4 +1,4 @@
-const IOS = process.env.IOS || "14.3";
+const IOS = process.env.IOS || "14.2";
 const REPORT_DIR = process.env.REPORT_DIR || `./report/${IOS}`;
 
 module.exports = {

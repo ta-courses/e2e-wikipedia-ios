@@ -4,7 +4,16 @@ export EXCLUDED_ARCHS=arm64
 
 build:
 	echo EXCLUDED_ARCHS=${EXCLUDED_ARCHS}
+	# add -quiet for less log
 	xcodebuild -scheme "Wikipedia" \
+		-UseModernBuildSystem=true \
+		-workspace "sut/Wikipedia.xcworkspace" \
+		-configuration Debug \
+		-derivedDataPath sut/ \
+		-sdk iphonesimulator 
+
+build_quiet:
+	xcodebuild -quiet -scheme "Wikipedia" \
 		-UseModernBuildSystem=true \
 		-workspace "sut/Wikipedia.xcworkspace" \
 		-configuration Debug \
@@ -18,4 +27,12 @@ clean:
 		-configuration Debug \
 		-derivedDataPath sut \
 		-sdk iphonesimulator clean
+	rm -rf sut/Build
+	rm -rf sut/DerivedData
+	rm -rf sut/Logs
+	rm -rf sut/Index
+	rm -rf sut/SourcePackages
+	rm -rf sut/ModuleCache.noindex
+	rm -rf sut/info.plist
+	rm -rf sut/Wikipedia.xcworkspace/xcshareddata/swiftpm
 
