@@ -1,0 +1,94 @@
+language: objective-c
+osx_image: xcode12.2
+
+env:
+  global:
+    - NODE_VERSION=stable
+# matrix:
+#     - IOS=13.7 TESTTORUN="${TEST_GROUP_1}"
+#     - IOS=13.7 TESTTORUN="${TEST_GROUP_2}"
+#     - IOS=14.2 TESTTORUN="${TEST_GROUP_1}"
+#     - IOS=14.2 TESTTORUN="${TEST_GROUP_2}"
+git:
+  depth: 1
+
+# notifications:
+#   slack:
+#     rooms:
+#       - <room-token>
+#     on_success: always # options: [always|never|change] default: always
+#     on_failure: always # options: [always|never|change] default: always
+#     on_start: never # default: false
+
+branches:
+  except:
+    - gh-pages
+
+cache:
+  yarn: true
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
+    - $HOME/Library/Caches/Homebrew
+
+before_install:
+  - echo "IOS=$IOS"
+  - echo "REPORT_DIR=$REPORT_DIR"
+  # - echo -e "machine github.com\n  login $GITHUB_USER\n  password $GITHUB_PWD" > ~/.netrc
+  # - gem install cocoapods --pre
+  # - gem update concurrent-ruby
+  # - pod setup
+  - brew tap wix/brew
+  - brew install applesimutils
+  - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+  - export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
+  - nvm alias default $NODE_VERSION
+  - brew install yarn
+  - yarn global add react-native-cli
+  - yarn global add detox-cli
+  - gem install xcpretty
+  - brew install git-lfs
+  - git lfs install
+  - git --version
+  - git lfs --version
+  # - yarn sut:clone $SUT_GIT_BRANCH_NAME
+install:
+  - echo $PWD
+  - echo $CP_HOME_DIR
+  - pod repo list
+  - yarn install
+  # compilation
+  # - yarn tsc
+  # unit test
+  # - yarn jest
+  # - travis_wait 20 yarn sut:build # | xcpretty -s # -tc -k -s -t
+  - instruments -s devices
+
+script:
+  - detox clean-framework-cache && detox build-framework-cache
+  # - detox test -c ios.com.ci e2e/IT/login.it.spec || true #startup simulator
+  # - ./scripts/ci_test.sh "${TESTTORUN}" $IOS || true
+  # - export IOS=14
+  # - detox test -c ios.com.ci.$IOS e2e/IT/login.it.spec || true #startup simulator
+  # - ./scripts/ci_test.sh e2e/ $IOS
+
+
+# deploy:
+#   provider: pages
+#   user: $GITHUB_USER
+#   password: $GITHUB_PWD
+#   token: $GITHUB_TOKEN
+#   deploy_key: $GITHUB_TOKEN
+#   api_key: $GITHUB_TOKEN
+#   local_dir: "./report/"
+#   draft: false
+#   overwrite: false
+#   skip_cleanup: true
+#   target_branch: gh-pages
+#   keep_history: true
+#   verbose: true
+#   on:
+#     all_branches: true
+
