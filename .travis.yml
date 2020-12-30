@@ -63,11 +63,14 @@ install:
   - yarn tsc
   # unit test
   # - yarn jest
-  # - travis_wait 20 yarn sut:build # | xcpretty -s # -tc -k -s -t
+  - travis_wait 20 yarn sut:build | xcpretty -s # -tc -k -s -t
   - instruments -s devices
 
 script:
   - detox clean-framework-cache && detox build-framework-cache
+  
+  # run e2e tests
+  - yarn test
   # - detox test -c ios.com.ci e2e/IT/login.it.spec || true #startup simulator
   # - ./scripts/ci_test.sh "${TESTTORUN}" $IOS || true
   # - export IOS=14
