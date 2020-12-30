@@ -1,6 +1,9 @@
 import { expect, element } from 'detox';
 
 export default class SettingsPage {
+    static async expectTextToBeVisible(text: string) {
+        await expect(element(by.text(text))).toBeVisible();
+    }
     static async expectTextToBeNotVisible(text: string) {
       await expect(element(by.text(text))).toBeNotVisible();
     }

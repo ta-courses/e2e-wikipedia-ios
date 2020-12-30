@@ -18,6 +18,7 @@ describe('Add language test', () => {
     await SettingsPage.tapToText("My languages");
     await SettingsPage.addAnotherLanguage.tap();
     await OtherLanguagePage.setLanguage("Español");
+    await SettingsPage.expectTextToBeVisible("Español");
     await SettingsPage.tapToText("Edit");
     await SettingsPage.deleteLanguageAtIndex(2);
     await SettingsPage.tapToText("Done");
