@@ -3,6 +3,8 @@ import WelcomePage from '../src/pageobject/WelcomePage';
 import HomePage from '../src/pageobject/HomePage';
 import SettingsPage from '../src/pageobject/SettingsPage';
 import LoginPage from '../src/pageobject/LoginPage';
+import {jest, describe, beforeEach, it} from '@jest/globals'
+
 describe('First test', () => {
   beforeEach(async () => {
     await WelcomePage.skipLearnIfNeed();

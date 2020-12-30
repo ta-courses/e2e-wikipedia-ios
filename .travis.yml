@@ -60,7 +60,7 @@ install:
   - pod repo list
   - yarn install
   # compilation
-  # - yarn tsc
+  - yarn tsc
   # unit test
   # - yarn jest
   # - travis_wait 20 yarn sut:build # | xcpretty -s # -tc -k -s -t

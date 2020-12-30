@@ -4,6 +4,9 @@ import HomePage from '../src/pageobject/HomePage';
 import SettingsPage from '../src/pageobject/SettingsPage';
 import LoginPage from '../src/pageobject/LoginPage';
 import OtherLanguagePage from '../src/pageobject/OtherLanguagePage';
+import {jest, describe, afterEach, it, beforeEach} from '@jest/globals'
+
+
 describe('Add language test', () => {
   beforeEach(async () => {
     await WelcomePage.skipLearnIfNeed();
