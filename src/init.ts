@@ -10,7 +10,11 @@ beforeEach(async function () {
             detoxPrintBusyIdleResources: "YES"
         },
         newInstance: true,
-        permissions: { notifications: "YES" }
+        permissions: { notifications: "YES" },
+        languageAndLocale: {
+            language: "en-GB",
+            locale: "en-GB"
+          }
     });
     
 });

@@ -42,9 +42,9 @@ before_install:
   - yarn global add detox-cli
 
 install:
-  - echo $PWD
-  - echo $CP_HOME_DIR
-  - pod repo list
+  # - echo $PWD
+  # - echo $CP_HOME_DIR
+  # - pod repo list
   - yarn install
   # compilation
   - yarn tsc
@@ -53,9 +53,8 @@ install:
   
   # build ios app
   - make clean
-  - make build_quiet
-  # - travis_wait 20 yarn sut:build
-  - instruments -s devices
+  - travis_wait 20 make build_quiet
+  # - instruments -s devices
 
 script:
   - detox clean-framework-cache && detox build-framework-cache

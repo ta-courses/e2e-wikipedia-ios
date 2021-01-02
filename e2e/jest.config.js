@@ -2,7 +2,7 @@ const execSync = require("child_process").execSync;
 
 const IOS = process.env.IOS || "13.5";
 const REPORT_DIR = process.env.REPORT_DIR || `./report/${IOS}`;
-const CURR_BRANCH_TESTER = execSync("echo $(git rev-parse --abbrev-ref HEAD)", {
+const CURR_BRANCH_TESTER = execSync("echo $(git symbolic-ref -q --short HEAD || git describe --tags --exact-match)", {
   encoding: "utf8",
   maxBuffer: 50 * 1024 * 1024,
 }).toString();
@@ -22,7 +22,6 @@ var now = new Date();
 
 module.exports = {
   testRunner: "jest-circus/runner",
-  // testRunner: "groups",
   runner: "groups",
   setupFilesAfterEnv: ["../src/init.ts"],
   testEnvironment: "../src/environment",
@@ -35,7 +34,7 @@ module.exports = {
     [
       "jest-html-reporters",
       {
-        filename: `iOS_e2e_report.html`,
+        filename: `index.html`,
         publicPath: REPORT_DIR,
         pageTitle: `iOS ${IOS} E2E Test Report - ${CURR_BRANCH_SUT}`,
         customInfos: [
@@ -69,7 +68,7 @@ module.exports = {
     [
       "jest-junit",
       {
-        suiteName: `${process.env.SUT_GIT_BRANCH_NAME} ${process.env.IOS}`,
+        suiteName: `${CURR_BRANCH_SUT} ${process.env.IOS}`,
         outputDirectory: REPORT_DIR,
         outputName: "junit.xml",
         uniqueOutputName: "false",
@@ -78,13 +77,13 @@ module.exports = {
   ],
 };
 
-Date.prototype.yyyymmdd = function() {
-  var mm = this.getMonth() + 1; // getMonth() is zero-based
-  var dd = this.getDate();
+// Date.prototype.yyyymmdd = function() {
+//   var mm = this.getMonth() + 1; // getMonth() is zero-based
+//   var dd = this.getDate();
 
-  return [this.getFullYear(),
-          (mm>9 ? '' : '0') + mm,
-          (dd>9 ? '' : '0') + dd
-         ].join('');
-};
+//   return [this.getFullYear(),
+//           (mm>9 ? '' : '0') + mm,
+//           (dd>9 ? '' : '0') + dd
+//          ].join('');
+// };
 

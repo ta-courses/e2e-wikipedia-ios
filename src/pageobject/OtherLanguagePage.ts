@@ -8,7 +8,7 @@ export default class OtherLanguagePage {
         await waitFor(element(by.text(newLanguage)))
             .toBeVisible()
             .whileElement(by.id("ta-lang-table"))
-            .scroll(500, "down");
+            .scroll(600, "down");
 
         await element(by.text(newLanguage)).tap();
     }
