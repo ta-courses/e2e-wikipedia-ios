@@ -42,9 +42,6 @@ before_install:
   - yarn global add detox-cli
 
 install:
-  # - echo $PWD
-  # - echo $CP_HOME_DIR
-  # - pod repo list
   - yarn install
   # compilation
   - yarn tsc
@@ -67,15 +64,15 @@ deploy:
   user: $GITHUB_USER
   password: $GITHUB_PWD
   token: $GITHUB_TOKEN
-  deploy_key: $GITHUB_TOKEN
-  api_key: $GITHUB_TOKEN
+  # deploy_key: $GITHUB_TOKEN
+  # api_key: $GITHUB_TOKEN
   local_dir: "./report/"
   draft: true
   overwrite: true
   skip_cleanup: true
   target_branch: gh-pages
-  keep_history: true
-  allow_failure: true
+  keep_history: false
+  # allow_failure: true
   verbose: true
   on:
     all_branches: true
