@@ -64,26 +64,8 @@ module.exports = {
           }
         ],
       },
-    ],
-    [
-      "jest-junit",
-      {
-        suiteName: `${CURR_BRANCH_SUT} ${process.env.IOS}`,
-        outputDirectory: REPORT_DIR,
-        outputName: "junit.xml",
-        uniqueOutputName: "false",
-      },
-    ],
+    ], [ 'jest-junit', {
+      outputDirectory: REPORT_DIR
+    }]
   ],
 };
-
-// Date.prototype.yyyymmdd = function() {
-//   var mm = this.getMonth() + 1; // getMonth() is zero-based
-//   var dd = this.getDate();
-
-//   return [this.getFullYear(),
-//           (mm>9 ? '' : '0') + mm,
-//           (dd>9 ? '' : '0') + dd
-//          ].join('');
-// };
-

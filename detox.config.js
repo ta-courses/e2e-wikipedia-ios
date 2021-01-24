@@ -3,7 +3,7 @@ const REPORT_DIR = process.env.REPORT_DIR || `./report/${IOS}`;
 
 module.exports = {
   "test-runner": "jest",
-  runnerConfig: "e2e/jest.config.js",
+  runnerConfig: "e2e/config.js",
   artifacts: {
     rootDir: REPORT_DIR,
   },
