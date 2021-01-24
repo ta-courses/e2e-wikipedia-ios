@@ -5,75 +5,31 @@ env:
   global:
     - NODE_VERSION=stable
 
-git:
-  depth: 1
-
-# notifications:
-#   slack:
-#     rooms:
-#       - <room-token>
-#     on_success: always # options: [always|never|change] default: always
-#     on_failure: always # options: [always|never|change] default: always
-#     on_start: never # default: false
-
-branches:
-  except:
-    - gh-pages
-
-cache:
-  yarn: true
-  directories:
-    - $HOME/.cache/yarn
-    - node_modules
-    - $HOME/Library/Caches/Homebrew
-
 before_install:
-  - echo "IOS=$IOS"
-  - echo "REPORT_DIR=$REPORT_DIR"
   - brew tap wix/brew
   - brew install applesimutils
+  #install node version manager
   - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-  - export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  - export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+  #install node
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
   - nvm alias default $NODE_VERSION
+
   - brew install yarn
   - yarn global add react-native-cli
   - yarn global add detox-cli
 
 install:
   - yarn install
-  # compilation
+  #compilation
   - yarn tsc
-  # unit test
-  # - yarn jest
-  
-  # build ios app
+  # build app
   - make clean
-  - travis_wait 20 make build_quiet
-  # - instruments -s devices
+  - travis_wait 20 make build
 
 script:
   - detox clean-framework-cache && detox build-framework-cache
+  #run e2e tests
+  - yarn test
   
-  # run e2e tests
-  - yarn test || true
-
-deploy:
-  provider: pages
-  user: $GITHUB_USER
-  password: $GITHUB_PWD
-  token: $GITHUB_TOKEN
-  # deploy_key: $GITHUB_TOKEN
-  # api_key: $GITHUB_TOKEN
-  local_dir: "./report/"
-  draft: true
-  overwrite: true
-  skip_cleanup: true
-  target_branch: gh-pages
-  keep_history: false
-  # allow_failure: true
-  verbose: true
-  on:
-    all_branches: true
-
