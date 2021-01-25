@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="
+ undefined" tests="5" failures="0" errors="0" time="414.117">
+  <testsuite name="First test" errors="0" failures="0" skipped="1" timestamp="2021-01-25T17:16:48" time="225.64" tests="3">
+    <testcase classname="First test should have welcome screen with search box" name="First test should have welcome screen with search box" time="38.078">
+    </testcase>
+    <testcase classname="First test should fail a login" name="First test should fail a login" time="44.617">
+    </testcase>
+    <testcase classname="First test should login as Detox.test2.course" name="First test should login as Detox.test2.course" time="0">
+      <skipped/>
+    </testcase>
+  </testsuite>
+  <testsuite name="Add language test" errors="0" failures="0" skipped="0" timestamp="2021-01-25T17:20:34" time="104.486" tests="1">
+    <testcase classname="Add language test should add Deutsch as new language" name="Add language test should add Deutsch as new language" time="75.535">
+    </testcase>
+  </testsuite>
+  <testsuite name="Version test" errors="0" failures="0" skipped="0" timestamp="2021-01-25T17:22:18" time="82.83" tests="1">
+    <testcase classname="Version test app version should have 6.7.3 (0)" name="Version test app version should have 6.7.3 (0)" time="54.894">
+    </testcase>
+  </testsuite>
+</testsuites>
